@@ -43,7 +43,7 @@ namespace WPFApp
 
         private void LogInAsync(object sender, RoutedEventArgs e)
         {
-            var request = new RestRequest(globals.localUrl, method: Method.Post);
+            var request = new RestRequest(globals.localURL, method: Method.Post);
             request.AddHeader("Content-Type", "application/json");
 
             var body = "{\n    \"login\": \"" + userLogin.Text + "\",\n    \"password\": \"" + userPassword.Password + "\"\n}";

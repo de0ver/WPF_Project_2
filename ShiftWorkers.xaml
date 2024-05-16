@@ -10,6 +10,7 @@
     <Grid>
         <Label Content="Выберите сотрудника: " HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="WorkersList" HorizontalAlignment="Left" Margin="161,24,0,0" VerticalAlignment="Top" Width="400"/>
-        <Button Click="DeleteWorker" Content="ЛИКВИДИРОВАТЬ" HorizontalAlignment="Left" Margin="128,64,0,0" VerticalAlignment="Top" Height="296" Width="466" FontFamily="Verdana" FontSize="50" Background="Red"/>
+        <Button Click="DeleteWorker" Content="Уволить" HorizontalAlignment="Left" Margin="580,17,0,0" VerticalAlignment="Top" FontFamily="Verdana" FontSize="16" Background="Red" Padding="5,5,5,5" />
+        <Button Click="ReturnWorker" Content="Вернуть" HorizontalAlignment="Left" Margin="676,17,0,0" VerticalAlignment="Top" FontFamily="Verdana" FontSize="16" Background="Green" Padding="5,5,5,5" />
     </Grid>
 </Window>

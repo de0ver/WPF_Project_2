@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9amzvF4zuNuGGPbGm5EI9+o436WMlHEpsKT8aYqv+Pm/VZxjopVKTo/ggbrQOBz8RLBx+BrVgWikPFvoKNYd3w==",
+  "dgSpecHash": "lR3GxgDEY54BHVKi90gm6xy8EHWANJi9mTrUWsRl/SPD/X8B+JcBZ0z5U3aWTyywqud39G+TiLEUJdN9W7CxPg==",
   "success": true,
-  "projectFilePath": "D:\\3is4\\Kiselev\\Desktop_RESTAPI\\WPFApp\\WPFApp.csproj",
+  "projectFilePath": "D:\\3is4\\Kiselev\\Desktop_RESTAPI\\WPF_Project_2\\WPFApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\student.COLLEGE.020\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\8.0.0\\microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512",
     "C:\\Users\\student.COLLEGE.020\\.nuget\\packages\\restsharp\\108.0.3\\restsharp.108.0.3.nupkg.sha512",

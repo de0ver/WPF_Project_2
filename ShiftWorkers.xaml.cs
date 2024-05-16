@@ -3,9 +3,7 @@ using System;
 using System.Windows;
 using RestSharp;
 using System.Text.Json;
-using System.Collections;
 using System.Collections.Generic;
-using System.Windows.Controls;
 
 namespace WPFApp
 {
@@ -17,10 +15,17 @@ namespace WPFApp
         public string status { get; set; }
         public string group { get; set; }
     }
-
     public class JSONData
     {
         public List<User> user { get; set; }
+    }
+    public class DeleteData
+    { public MessageData data { get; set; } }
+
+    public class MessageData
+    {
+        public int id { get; set; }
+        public string status { get; set; }
     }
     /// <summary>
     /// Interaction logic for ShiftWorkers.xaml
@@ -32,8 +37,12 @@ namespace WPFApp
         public ShiftWorkers()
         {
             InitializeComponent();
+            GetWorkers();
+        }
 
-            var request = new RestRequest(globals.getUsersUrl, method: Method.Get);
+        public void GetWorkers()
+        {
+            var request = new RestRequest(globals.getUsersURL, method: Method.Get);
             request.AddHeader("Authorization", "Bearer " + Globals.userToken);
             request.AlwaysMultipartFormData = true;
             var response = globals.client.Execute(request);
@@ -47,10 +56,39 @@ namespace WPFApp
             }
         }
 
+        public void Clear()
+        {
+            WorkersList.Items.Clear();
+        }
+
         public void DeleteWorker(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Delete: " + workersId[WorkersList.SelectedIndex]);
+            var request = new RestRequest(globals.getUsersURL + "/" + workersId[WorkersList.SelectedIndex], method: Method.Delete);
+            request.AddHeader("Authorization", "Bearer " + Globals.userToken);
+            var response = globals.client.Execute(request);
+
+            var json = JsonSerializer.Deserialize<DeleteData>(response.Content);
+
+            MessageBox.Show("ID: " + json.data.id +  "\nStatus: " + json.data.status);
+
+            Clear();
+            GetWorkers();
         }
+
+        public void ReturnWorker(object sender, RoutedEventArgs e)
+        {
+            var request = new RestRequest(globals.getUsersURL + "/" + workersId[WorkersList.SelectedIndex] + "/back", method: Method.Delete);
+            request.AddHeader("Authorization", "Bearer " + Globals.userToken);
+            var response = globals.client.Execute(request);
+
+            var json = JsonSerializer.Deserialize<DeleteData>(response.Content);
+
+            MessageBox.Show("ID: " + json.data.id + "\nStatus: " + json.data.status);
+
+            Clear();
+            GetWorkers();
+        }
+
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
