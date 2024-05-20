@@ -101,7 +101,7 @@ namespace WPFApp {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/WPFApp;V1.0.0.0;component/adminpage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/WPFApp;component/adminpage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\AdminPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

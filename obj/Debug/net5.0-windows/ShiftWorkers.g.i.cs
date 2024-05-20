@@ -173,7 +173,7 @@ namespace WPFApp {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/WPFApp;V1.0.0.0;component/shiftworkers.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/WPFApp;component/shiftworkers.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\ShiftWorkers.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
