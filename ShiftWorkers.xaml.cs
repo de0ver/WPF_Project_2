@@ -1,9 +1,10 @@
 ﻿using Global;
-using System;
-using System.Windows;
 using RestSharp;
-using System.Text.Json;
+using System;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace WPFApp
 {
@@ -14,6 +15,7 @@ namespace WPFApp
     {
         Globals globals = new Globals();
         public List<int> workersId = new List<int>();
+        private bool skip_close = false;
 
         public ShiftWorkers()
         {
@@ -21,7 +23,7 @@ namespace WPFApp
             GetWorkers();
         }
 
-        public void GetWorkers()
+        private void GetWorkers()
         {
             var request = new RestRequest(globals.getUsersURL, method: Method.Get);
             request.AddHeader("Authorization", "Bearer " + Globals.userToken);
@@ -37,20 +39,21 @@ namespace WPFApp
                     WorkersList.Items.Add("ID: " + json.user[i].id + " | Name: " + json.user[i].name + " | Status: " + json.user[i].status + " | Group: " + json.user[i].group);
                     workersId.Add(int.Parse(json.user[i].id.ToString())); //trash
                 }
-            } catch (Exception error)
+            }
+            catch (Exception error)
             {
                 MessageBox.Show(error.ToString());
             }
         }
 
-        public void Clear()
+        private void Clear()
         {
             WorkersList.Items.Clear();
             workersId = new List<int>();
             GetWorkers();
         }
 
-        public void DeleteWorker(object sender, RoutedEventArgs e)
+        private void DeleteWorker(object sender, RoutedEventArgs e)
         {
             if (WorkersList.SelectedIndex >= 0)
             {
@@ -66,7 +69,8 @@ namespace WPFApp
                         var json = JsonSerializer.Deserialize<Globals.HTTPMessageCreated>(response.Content);
                         MessageBox.Show("ID: " + json.data.id + "\nStatus: " + json.data.status);
                     }
-                } catch (Exception error)
+                }
+                catch (Exception error)
                 {
                     MessageBox.Show(error.ToString());
                 }
@@ -75,7 +79,7 @@ namespace WPFApp
             Clear();
         }
 
-        public void ReturnWorker(object sender, RoutedEventArgs e)
+        private void ReturnWorker(object sender, RoutedEventArgs e)
         {
             var request = new RestRequest(globals.getUsersURL + "/" + workersId[WorkersList.SelectedIndex] + "/back", method: Method.Delete);
             request.AddHeader("Authorization", "Bearer " + Globals.userToken);
@@ -88,7 +92,8 @@ namespace WPFApp
                     var json = JsonSerializer.Deserialize<Globals.HTTPMessageCreated>(response.Content);
                     MessageBox.Show("ID: " + json.data.id + "\nStatus: " + json.data.status);
                 }
-            } catch (Exception error)
+            }
+            catch (Exception error)
             {
                 MessageBox.Show(error.ToString());
             }
@@ -96,92 +101,102 @@ namespace WPFApp
             Clear();
         }
 
-        public void AddWorker(object sender, RoutedEventArgs e)
+        private void AddWorker(object sender, RoutedEventArgs e)
         {
-            if (CheckInputs())
+            var request = new RestRequest(globals.getUsersURL, method: Method.Post);
+
+            request.AddHeader("Authorization", "Bearer " + Globals.userToken);
+            request.AddParameter("name", inputName.Text);
+            request.AddParameter("surname", inputSurname.Text);
+            request.AddParameter("patronymic", inputPatronymic.Text);
+            request.AddParameter("login", inputLogin.Text);
+            request.AddParameter("password", inputPassword.Password);
+            request.AddParameter("role_id", inputRole.SelectedIndex + 1);
+
+            try
             {
-                var request = new RestRequest(globals.getUsersURL, method: Method.Post);
-
-                request.AddHeader("Authorization", "Bearer " + Globals.userToken);
-                request.AddParameter("name", inputName.Text);
-                request.AddParameter("surname", inputSurname.Text);
-                request.AddParameter("patronymic", inputPatronymic.Text);
-                request.AddParameter("login", inputLogin.Text);
-                request.AddParameter("password", inputPassword.Password);
-                request.AddParameter("role_id", inputRole.SelectedIndex + 1);
-
-                try
+                var response = globals.client.Execute(request);
+                if (response.StatusCode == System.Net.HttpStatusCode.Created)
                 {
-                    var response = globals.client.Execute(request);
-                    if (response.StatusCode == System.Net.HttpStatusCode.Created)
+                    var json = JsonSerializer.Deserialize<Globals.HTTPMessageCreated>(response.Content);
+                    MessageBox.Show("ID: " + json.data.id + "\nStatus: " + json.data.status);
+
+                    inputName.Text = inputSurname.Text = inputPatronymic.Text = inputLogin.Text = inputPassword.Password = inputPasswordConfirm.Password = null;
+                    inputRole.SelectedIndex = -1;
+
+                    Clear();
+                }
+                else
+                {
+                    var json = JsonSerializer.Deserialize<Globals.HTTPMessageError>(response.Content);
+                    if (json.error.errors != null)
                     {
-                        var json = JsonSerializer.Deserialize<Globals.HTTPMessageCreated>(response.Content);
-                        MessageBox.Show("ID: " + json.data.id + "\nStatus: " + json.data.status);
+                        string big_message = "Code: " + json.error.code + "\nMessage: " + json.error.message;
 
-                        inputName.Text = inputSurname.Text = inputPatronymic.Text = inputLogin.Text = inputPassword.Password = inputPasswordConfirm.Password = null;
-                        inputRole.SelectedIndex = -1;
+                        if (json.error.errors.name != null)
+                            big_message += "\nName: " + json.error.errors?.name[0];
 
-                        Clear();
+                        if (json.error.errors.surname != null)
+                            big_message += "\nSurname: " + json.error.errors?.surname[0];
+
+                        if (json.error.errors.patronymic != null)
+                            big_message += "\nPatronymic: " + json.error.errors?.patronymic[0];
+
+                        if (json.error.errors.login != null)
+                            big_message += "\nLogin: " + json.error.errors?.login[0];
+
+                        if (json.error.errors.password != null)
+                            big_message += "\nPassword: " + json.error.errors?.password[0];
+
+                        if (json.error.errors.role_id != null)
+                            big_message += "\nRole: " + json.error.errors?.role_id[0];
+
+                        MessageBox.Show(big_message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     else
                     {
-                        var json = JsonSerializer.Deserialize<Globals.HTTPMessageError>(response.Content);
-                        if (json.error.errors != null)
-                        {
-                            if (json.error.errors.login != null && json.error.errors.password != null)
-                            {
-                                MessageBox.Show("Code: " + json.error.code + "\nMessage: " + json.error.message + "\nLogin: " + json.error.errors?.login[0] + "\nPassword: " + json.error.errors?.password[0], "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                            }
-                            else if (json.error.errors.login == null && json.error.errors.password != null)
-                            {
-                                MessageBox.Show("Code: " + json.error.code + "\nMessage: " + json.error.message + "\nPassword: " + json.error.errors?.password[0], "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Code: " + json.error.code + "\nMessage: " + json.error.message + "\nLogin: " + json.error.errors?.login[0], "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Code: " + json.error.code + "\nMessage: " + json.error.message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                    }                    
-                } catch (Exception error)
-                {
-                    MessageBox.Show(error.ToString());
+                        MessageBox.Show("Code: " + json.error.code + "\nMessage: " + json.error.message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.ToString());
             }
         }
 
-        public bool CheckInputs()
+        private void CheckInputs(object sender, TextChangedEventArgs e)
         {
             checkName.IsChecked = inputName.Text.Length >= 3;
             checkSurname.IsChecked = inputSurname.Text.Length >= 3;
             checkPatronymic.IsChecked = inputPatronymic.Text.Length >= 3;
             checkLogin.IsChecked = inputLogin.Text.Length >= 3;
-            checkPassword.IsChecked = inputPassword.Password.Length >= 4;
-            checkPasswordConf.IsChecked = inputPassword.Password == inputPasswordConfirm.Password;
-            checkRole.IsChecked = inputRole.SelectedIndex >= 0;
-            //good or bad???
-            if (checkName.IsChecked == true && checkSurname.IsChecked == true && checkPatronymic.IsChecked == true && checkLogin.IsChecked == true && checkPasswordConf.IsChecked == true && checkRole.IsChecked == true)
-            {
-                return true;
-            }
-
-            return false;
         }
 
-        public void Back(object sender, RoutedEventArgs e)
+        private void CheckPasswords(object sender, RoutedEventArgs e)
         {
-            Hide();
-            new AdminPage().Show();
+            checkPassword.IsChecked = inputPassword.Password.Length >= 4;
+            checkPasswordConf.IsChecked = inputPassword.Password == inputPasswordConfirm.Password;
+        }
+
+        private void inputRole_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            checkRole.IsChecked = inputRole.SelectedIndex >= 0;
+        }
+
+        private void Back(object sender, RoutedEventArgs e)
+        {
+            //1 million windows is ready, another one is on the way
+            skip_close = true;
+            Close();
         }
 
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
 
-            Application.Current.Shutdown();
+            if (!skip_close)
+                Application.Current.Shutdown();
         }
     }
 }

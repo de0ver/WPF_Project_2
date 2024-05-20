@@ -62,3 +62,5 @@ D:\3is4\Kiselev\Desktop_RESTAPI\WPF_Project_2\obj\Debug\net5.0-windows\WPFApp.dl
 D:\3is4\Kiselev\Desktop_RESTAPI\WPF_Project_2\obj\Debug\net5.0-windows\ref\WPFApp.dll
 D:\3is4\Kiselev\Desktop_RESTAPI\WPF_Project_2\obj\Debug\net5.0-windows\WPFApp.pdb
 D:\3is4\Kiselev\Desktop_RESTAPI\WPF_Project_2\obj\Debug\net5.0-windows\WPFApp.genruntimeconfig.cache
+D:\3is4\Kiselev\Desktop_RESTAPI\WPF_Project_2\obj\Debug\net5.0-windows\WorkShifts.g.cs
+D:\3is4\Kiselev\Desktop_RESTAPI\WPF_Project_2\obj\Debug\net5.0-windows\WorkShifts.baml

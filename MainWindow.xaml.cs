@@ -40,27 +40,7 @@ namespace WPFApp
 
                         Globals.userToken = json.data.user_token;
 
-                        /*Globals.JSONUser.User fix = new Globals.JSONUser.User();
-                        fix.id = json.data.user_id;
-                        fix.login = json.data.login;
-                        fix.name = json.data.name;
-                        switch (json.data.role_id)
-                        {
-                            case 1:
-                                fix.group = "Администратор";
-                                break;
-                            case 2:
-                                fix.group = "Официант";
-                                break;
-                            case 3:
-                                fix.group = "Повар";
-                                break;
-                        }
-                        fix.status = "working";
-
-                        user.user.Add(fix);*/
-
-                        //adminPage.InitializeProfile(user);
+                        adminPage.InitializeProfile(json.data.login, json.data.name, json.data.surname, json.data.patronymic, json.data.role_id, json.data.user_id);
 
                         adminPage.Show();
 
@@ -71,18 +51,14 @@ namespace WPFApp
                         var json = JsonSerializer.Deserialize<Globals.HTTPMessageError>(response.Content);
                         if (json.error.errors != null)
                         {
-                            if (json.error.errors.login != null && json.error.errors.password != null)
-                            {
-                                MessageBox.Show("Code: " + json.error.code + "\nMessage: " + json.error.message + "\nLogin: " + json.error.errors?.login[0] + "\nPassword: " + json.error.errors?.password[0], "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                            }
-                            else if (json.error.errors.login == null && json.error.errors.password != null)
-                            {
-                                MessageBox.Show("Code: " + json.error.code + "\nMessage: " + json.error.message + "\nPassword: " + json.error.errors?.password[0], "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Code: " + json.error.code + "\nMessage: " + json.error.message + "\nLogin: " + json.error.errors?.login[0], "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                            }
+                            string big_message = "Code: " + json.error.code + "\nMessage: " + json.error.message;
+
+                            if (json.error.errors.login != null)
+                                big_message += json.error.errors.login[0];
+
+                            if (json.error.errors.password != null)
+                                big_message += json.error.errors.password[0];
+
                         } else
                         {
                             MessageBox.Show("Code: " + json.error.code + "\nMessage: " + json.error.message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);

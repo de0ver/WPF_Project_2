@@ -14,14 +14,26 @@ namespace WPFApp
             InitializeComponent();
         }
 
-        public void InitializeProfile(Globals.JSONUser user)
+        public void InitializeProfile(string login, string name, string surname, string patronymic, int role_id, int user_id)
         {
-            userLogin.Text = user.user[0].login;
-            userName.Text = user.user[0].name;
-            userSurname.Text = user.user[0].login;
-            userPatronymic.Text = user.user[0].login;
-            userRole.Text = user.user[0].group;
-            userId.Text = user.user[0].id.ToString();
+            userLogin.Text += login;
+            userName.Text += name;
+            userSurname.Text += surname;
+            userPatronymic.Text += patronymic;
+            switch (role_id)
+            {
+                case 1:
+                    userRole.Text += "Администратор";
+                    break;
+                case 2:
+                    userRole.Text += "Официант";
+                    break;
+                case 3:
+                    userRole.Text += "Повар";
+                    break;
+            }
+
+            userId.Text += user_id.ToString();
         }
 
         //switch (sender.Name) { case "btn1": break; case "btn2": break; case "btn3": break; }
@@ -29,13 +41,21 @@ namespace WPFApp
         {
             ShiftWorkers shiftWorkers = new ShiftWorkers();
 
-            shiftWorkers.Show();
+            this.Visibility = Visibility.Collapsed;
 
-            Hide();
+            shiftWorkers.ShowDialog();
+
+            this.Visibility = Visibility.Visible;
         }
         private void goToWorkShifts(object sender, RoutedEventArgs e)
         {
-            Close();
+            WorkShifts workShifts = new WorkShifts();
+
+            this.Visibility = Visibility.Collapsed;
+
+            workShifts.ShowDialog();
+
+            this.Visibility = Visibility.Visible;
         }
         private void goToOrders(object sender, RoutedEventArgs e)
         {

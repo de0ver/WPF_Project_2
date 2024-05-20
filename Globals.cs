@@ -56,8 +56,12 @@ namespace Global
 
                 public class Errors
                 {
+                    public List<string> name { get; set; }
+                    public List<string> surname { get; set; }
+                    public List<string> patronymic { get; set; }
                     public List<string> login { get; set; }
                     public List<string> password { get; set; }
+                    public List<string> role_id { get; set; }
                 }
             }
         }

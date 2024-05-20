@@ -25,18 +25,18 @@
                 <Label Content="Введите пароль: " HorizontalAlignment="Left" Margin="21,136,0,0" VerticalAlignment="Top"/>
                 <Label Content="Подтвердите пароль: " HorizontalAlignment="Left" Margin="21,166,0,0" VerticalAlignment="Top"/>
                 <Label Content="Выберите роль: " HorizontalAlignment="Left" Margin="21,196,0,0" VerticalAlignment="Top"/>
-                <ComboBox x:Name="inputRole" HorizontalAlignment="Left" Margin="158,198,0,0" VerticalAlignment="Top" Width="120">
+                <ComboBox SelectionChanged="inputRole_SelectionChanged" x:Name="inputRole" HorizontalAlignment="Left" Margin="158,198,0,0" VerticalAlignment="Top" Width="120">
                     <ComboBoxItem Content="Администратор"/>
                     <ComboBoxItem Content="Официант"/>
                     <ComboBoxItem Content="Повар"/>
                 </ComboBox>
                 <Button Click="AddWorker" Content="Создать" HorizontalAlignment="Left" Margin="19,236,0,0" VerticalAlignment="Top" Height="85" Width="258"/>
-                <TextBox x:Name="inputName" HorizontalAlignment="Left" Margin="158,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                <TextBox x:Name="inputSurname" HorizontalAlignment="Left" Margin="158,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                <TextBox x:Name="inputPatronymic" HorizontalAlignment="Left" Margin="158,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                <TextBox x:Name="inputLogin" HorizontalAlignment="Left" Margin="158,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                <PasswordBox x:Name="inputPassword" HorizontalAlignment="Left" Margin="158,140,0,0" VerticalAlignment="Top" Width="120"/>
-                <PasswordBox x:Name="inputPasswordConfirm" HorizontalAlignment="Left" Margin="158,171,0,0" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="inputName" TextChanged="CheckInputs" HorizontalAlignment="Left" Margin="158,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="inputSurname" TextChanged="CheckInputs" HorizontalAlignment="Left" Margin="158,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="inputPatronymic" TextChanged="CheckInputs" HorizontalAlignment="Left" Margin="158,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="inputLogin" TextChanged="CheckInputs" HorizontalAlignment="Left" Margin="158,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <PasswordBox x:Name="inputPassword" PasswordChanged="CheckPasswords" HorizontalAlignment="Left" Margin="158,140,0,0" VerticalAlignment="Top" Width="120"/>
+                <PasswordBox x:Name="inputPasswordConfirm" PasswordChanged="CheckPasswords" HorizontalAlignment="Left" Margin="158,171,0,0" VerticalAlignment="Top" Width="120"/>
                 <CheckBox x:Name="checkName" HorizontalAlignment="Left" Margin="303,17,0,0" VerticalAlignment="Top" IsEnabled="False"/>
                 <CheckBox x:Name="checkSurname" HorizontalAlignment="Left" Margin="303,48,0,0" VerticalAlignment="Top" IsEnabled="False"/>
                 <CheckBox x:Name="checkPatronymic" HorizontalAlignment="Left" Margin="303,79,0,0" VerticalAlignment="Top" IsEnabled="False"/>
