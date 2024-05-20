@@ -7,10 +7,49 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="ShiftWorkers" Height="450" Width="800">
-    <Grid>
-        <Label Content="Выберите сотрудника: " HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="WorkersList" HorizontalAlignment="Left" Margin="161,24,0,0" VerticalAlignment="Top" Width="400"/>
-        <Button Click="DeleteWorker" Content="Уволить" HorizontalAlignment="Left" Margin="580,17,0,0" VerticalAlignment="Top" FontFamily="Verdana" FontSize="16" Background="Red" Padding="5,5,5,5" />
-        <Button Click="ReturnWorker" Content="Вернуть" HorizontalAlignment="Left" Margin="676,17,0,0" VerticalAlignment="Top" FontFamily="Verdana" FontSize="16" Background="Green" Padding="5,5,5,5" />
+    <Grid Background="White">
+        <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="50" Margin="65,8,0,0" VerticalAlignment="Top" Width="725">
+            <Grid Margin="-1,0,0,0">
+                <Label Content="Выберите сотрудника: " HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                <ComboBox x:Name="WorkersList" HorizontalAlignment="Left" Margin="151,0,0,0" VerticalAlignment="Center" Width="390"/>
+                <Button Click="DeleteWorker" Content="Уволить" HorizontalAlignment="Left" Margin="546,0,0,0" VerticalAlignment="Center" FontFamily="Verdana" FontSize="16" Background="Red" Padding="5,5,5,5" />
+                <Button Click="ReturnWorker" Content="Вернуть" HorizontalAlignment="Left" Margin="629,0,0,0" VerticalAlignment="Center" FontFamily="Verdana" FontSize="16" Background="Green" Padding="5,5,5,5" />
+            </Grid>
+        </Border>
+        <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="345" Margin="10,63,0,0" VerticalAlignment="Top" Width="351">
+            <Grid Margin="0,1,0,-1">
+                <Label Content="Введите имя: " HorizontalAlignment="Left" Margin="21,10,0,0" VerticalAlignment="Top"/>
+                <Label Content="Введите фамилию: " HorizontalAlignment="Left" Margin="21,41,0,0" VerticalAlignment="Top"/>
+                <Label Content="Введите отчество: " HorizontalAlignment="Left" Margin="21,72,0,0" VerticalAlignment="Top" />
+                <Label Content="Введите логин: " HorizontalAlignment="Left" Margin="21,105,0,0" VerticalAlignment="Top"/>
+                <Label Content="Введите пароль: " HorizontalAlignment="Left" Margin="21,136,0,0" VerticalAlignment="Top"/>
+                <Label Content="Подтвердите пароль: " HorizontalAlignment="Left" Margin="21,166,0,0" VerticalAlignment="Top"/>
+                <Label Content="Выберите роль: " HorizontalAlignment="Left" Margin="21,196,0,0" VerticalAlignment="Top"/>
+                <ComboBox x:Name="inputRole" HorizontalAlignment="Left" Margin="158,198,0,0" VerticalAlignment="Top" Width="120">
+                    <ComboBoxItem Content="Администратор"/>
+                    <ComboBoxItem Content="Официант"/>
+                    <ComboBoxItem Content="Повар"/>
+                </ComboBox>
+                <Button Click="AddWorker" Content="Создать" HorizontalAlignment="Left" Margin="19,236,0,0" VerticalAlignment="Top" Height="85" Width="258"/>
+                <TextBox x:Name="inputName" HorizontalAlignment="Left" Margin="158,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="inputSurname" HorizontalAlignment="Left" Margin="158,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="inputPatronymic" HorizontalAlignment="Left" Margin="158,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="inputLogin" HorizontalAlignment="Left" Margin="158,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <PasswordBox x:Name="inputPassword" HorizontalAlignment="Left" Margin="158,140,0,0" VerticalAlignment="Top" Width="120"/>
+                <PasswordBox x:Name="inputPasswordConfirm" HorizontalAlignment="Left" Margin="158,171,0,0" VerticalAlignment="Top" Width="120"/>
+                <CheckBox x:Name="checkName" HorizontalAlignment="Left" Margin="303,17,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                <CheckBox x:Name="checkSurname" HorizontalAlignment="Left" Margin="303,48,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                <CheckBox x:Name="checkPatronymic" HorizontalAlignment="Left" Margin="303,79,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                <CheckBox x:Name="checkLogin" HorizontalAlignment="Left" Margin="303,110,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                <CheckBox x:Name="checkPassword" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False" Margin="303,141,0,0"/>
+                <CheckBox x:Name="checkPasswordConf" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False" Margin="303,171,0,0"/>
+                <CheckBox x:Name="checkRole" HorizontalAlignment="Left" Margin="303,201,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+            </Grid>
+        </Border>
+        <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="345" Margin="366,63,0,0" VerticalAlignment="Top" Width="424">
+            <Label Content="Здесь фото сотрудника при создании..."/>
+        </Border>
+        <Button Click="Back" Content="←" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top" Height="50" Width="50" FontSize="20"/>
+
     </Grid>
 </Window>

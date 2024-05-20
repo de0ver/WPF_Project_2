@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using Global;
 
 namespace WPFApp
 {
@@ -13,26 +14,14 @@ namespace WPFApp
             InitializeComponent();
         }
 
-        public void InitializeProfile(string login, string name, string surname, string patronymic, int role_id, int user_id)
+        public void InitializeProfile(Globals.JSONUser user)
         {
-            userLogin.Content += login;
-            userName.Content += name;
-            userSurname.Content += surname;
-            userPatronymic.Content += patronymic;
-            switch (role_id)
-            {
-                case 1:
-                    userRole.Content += "Администратор";
-                    break;
-                case 2:
-                    userRole.Content += "Официант";
-                    break;
-                case 3:
-                    userRole.Content += "Повар";
-                    break;
-            }
-
-            userId.Content += user_id.ToString();
+            userLogin.Text = user.user[0].login;
+            userName.Text = user.user[0].name;
+            userSurname.Text = user.user[0].login;
+            userPatronymic.Text = user.user[0].login;
+            userRole.Text = user.user[0].group;
+            userId.Text = user.user[0].id.ToString();
         }
 
         //switch (sender.Name) { case "btn1": break; case "btn2": break; case "btn3": break; }

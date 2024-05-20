@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\3is4\Kiselev\Desktop_RESTAPI\WPFApp\obj\Release\net5.0-windows\
-WPFApp
+D:\3is4\Kiselev\Desktop_RESTAPI\WPF_Project_2\obj\Release\net5.0-windows\
+WPFApp_yswfblxi_wpftmp
 none
 false
 TRACE;RELEASE;NET;NET5_0;NETCOREAPP
-D:\3is4\Kiselev\Desktop_RESTAPI\WPFApp\App.xaml
-11407045341
+D:\3is4\Kiselev\Desktop_RESTAPI\WPF_Project_2\App.xaml
+3-1406533475
 
-41873453695
-19562796422
-MainWindow.xaml;
+10860092338
+194-384057799
+AdminPage.xaml;MainWindow.xaml;ShiftWorkers.xaml;
 
-False
+True
 

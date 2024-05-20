@@ -6,36 +6,13 @@ using RestSharp;
 
 namespace WPFApp
 {
-    public class HTTPMessageOK
-    {
-        public Data data { get; set; }
-        public class Data
-        {
-            public string user_token { get; set; }
-            public int role_id { get; set; }
-            public string name { get; set; }
-            public string surname { get; set; }
-            public string patronymic { get; set; }
-            public string login { get; set; }
-            public int user_id { get; set; }
-        }
-    }
-
-    public class HTTPMessageError
-    {
-        public Error error { get; set; }
-        public class Error
-        {
-            public int code { get; set; }
-            public string message { get; set; }
-        }
-    }
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
         Globals globals = new Globals();
+        Globals.JSONUser user = new Globals.JSONUser();
         public MainWindow()
         {
             InitializeComponent();
@@ -59,11 +36,31 @@ namespace WPFApp
                     {
                         AdminPage adminPage = new AdminPage();
 
-                        var json = JsonSerializer.Deserialize<HTTPMessageOK>(response.Content);
+                        var json = JsonSerializer.Deserialize<Globals.HTTPMessageOK>(response.Content);
 
                         Globals.userToken = json.data.user_token;
 
-                        adminPage.InitializeProfile(json.data.login, json.data.name, json.data.surname, json.data.patronymic, json.data.role_id, json.data.user_id);
+                        /*Globals.JSONUser.User fix = new Globals.JSONUser.User();
+                        fix.id = json.data.user_id;
+                        fix.login = json.data.login;
+                        fix.name = json.data.name;
+                        switch (json.data.role_id)
+                        {
+                            case 1:
+                                fix.group = "Администратор";
+                                break;
+                            case 2:
+                                fix.group = "Официант";
+                                break;
+                            case 3:
+                                fix.group = "Повар";
+                                break;
+                        }
+                        fix.status = "working";
+
+                        user.user.Add(fix);*/
+
+                        //adminPage.InitializeProfile(user);
 
                         adminPage.Show();
 
@@ -71,9 +68,25 @@ namespace WPFApp
                     }
                     else
                     {
-                        var json = JsonSerializer.Deserialize<HTTPMessageError>(response.Content);
-
-                        MessageBox.Show(this, "Code: " + json.error.code + "\nMessage: " + json.error.message, "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                        var json = JsonSerializer.Deserialize<Globals.HTTPMessageError>(response.Content);
+                        if (json.error.errors != null)
+                        {
+                            if (json.error.errors.login != null && json.error.errors.password != null)
+                            {
+                                MessageBox.Show("Code: " + json.error.code + "\nMessage: " + json.error.message + "\nLogin: " + json.error.errors?.login[0] + "\nPassword: " + json.error.errors?.password[0], "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                            else if (json.error.errors.login == null && json.error.errors.password != null)
+                            {
+                                MessageBox.Show("Code: " + json.error.code + "\nMessage: " + json.error.message + "\nPassword: " + json.error.errors?.password[0], "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Code: " + json.error.code + "\nMessage: " + json.error.message + "\nLogin: " + json.error.errors?.login[0], "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                        } else
+                        {
+                            MessageBox.Show("Code: " + json.error.code + "\nMessage: " + json.error.message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
                 }
             }

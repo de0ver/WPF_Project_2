@@ -10,7 +10,7 @@
         "projectUniqueName": "D:\\3is4\\Kiselev\\Desktop_RESTAPI\\WPF_Project_2\\WPFApp.csproj",
         "projectName": "WPFApp",
         "projectPath": "D:\\3is4\\Kiselev\\Desktop_RESTAPI\\WPF_Project_2\\WPFApp.csproj",
-        "packagesPath": "C:\\Users\\student.COLLEGE.020\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\student.COLLEGE.021\\.nuget\\packages\\",
         "outputPath": "D:\\3is4\\Kiselev\\Desktop_RESTAPI\\WPF_Project_2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
@@ -18,7 +18,7 @@
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\student.COLLEGE.020\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\student.COLLEGE.021\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"

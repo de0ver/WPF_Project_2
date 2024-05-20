@@ -6,15 +6,6 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v5.0": {
-      "WPFApp/1": {
-        "dependencies": {
-          "RestSharp": "108.0.3",
-          "System.Text.Json": "8.0.3"
-        },
-        "runtime": {
-          "WPFApp.dll": {}
-        }
-      },
       "Microsoft.Bcl.AsyncInterfaces/8.0.0": {
         "runtime": {
           "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {
@@ -77,11 +68,6 @@
     }
   },
   "libraries": {
-    "WPFApp/1": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
     "Microsoft.Bcl.AsyncInterfaces/8.0.0": {
       "type": "package",
       "serviceable": true,

@@ -8,7 +8,7 @@
     <description>Package Description</description>
     <dependencies>
       <group targetFramework="net5.0-windows7.0">
-        <dependency id="RestSharp" version="108.0.0" exclude="Build,Analyzers" />
+        <dependency id="RestSharp" version="108.0.3" exclude="Build,Analyzers" />
         <dependency id="System.Text.Json" version="8.0.3" exclude="Build,Analyzers" />
       </group>
     </dependencies>
@@ -19,7 +19,7 @@
     </frameworkReferences>
   </metadata>
   <files>
-    <file src="D:\3is4\Kiselev\Desktop_RESTAPI\WPFApp\bin\Release\net5.0-windows\WPFApp.runtimeconfig.json" target="lib\net5.0-windows7.0\WPFApp.runtimeconfig.json" />
-    <file src="D:\3is4\Kiselev\Desktop_RESTAPI\WPFApp\bin\Release\net5.0-windows\WPFApp.dll" target="lib\net5.0-windows7.0\WPFApp.dll" />
+    <file src="D:\3is4\Kiselev\Desktop_RESTAPI\WPF_Project_2\bin\Release\net5.0-windows\WPFApp.runtimeconfig.json" target="lib\net5.0-windows7.0\WPFApp.runtimeconfig.json" />
+    <file src="D:\3is4\Kiselev\Desktop_RESTAPI\WPF_Project_2\bin\Release\net5.0-windows\WPFApp.dll" target="lib\net5.0-windows7.0\WPFApp.dll" />
   </files>
 </package>
