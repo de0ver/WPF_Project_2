@@ -15,7 +15,6 @@ namespace WPFApp
     {
         Globals globals = new Globals();
         public List<int> workersId = new List<int>();
-        private bool skip_close = false;
 
         public ShiftWorkers()
         {
@@ -187,16 +186,8 @@ namespace WPFApp
         private void Back(object sender, RoutedEventArgs e)
         {
             //1 million windows is ready, another one is on the way
-            skip_close = true;
+            //Hide();
             Close();
-        }
-
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-
-            if (!skip_close)
-                Application.Current.Shutdown();
         }
     }
 }

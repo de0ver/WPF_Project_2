@@ -15,8 +15,9 @@ namespace Global
         public static string localProxyURL = "http://192.168.0.17:3128";
         public string globalURL = "http://api.govorovma.ru/api-cafe/login";
         public string localURL = "http://cncaevh-m2.wsr.ru/api-cafe/login";
-        public string getUsersURL = "http://cncaevh-m2.wsr.ru/api-cafe/user";
-        public string deleteUserURL = "http://cncaevh-m2.wsr.ru/api-cafe/user";
+        public string getUsersURL = "http://cncaevh-m2.wsr.ru/api-cafe/user"; //xd
+        public string deleteUserURL = "http://cncaevh-m2.wsr.ru/api-cafe/user"; //xd
+        public string addWorkShift = "http://cncaevh-m2.wsr.ru/api-cafe/work-shift";
         public static string userToken { get; set; }
 
         public static WebProxy webProxy = new WebProxy
@@ -90,6 +91,15 @@ namespace Global
                 public string login { get; set; }
                 public int user_id { get; set; }
             }
+        }
+
+        public class HTTPMessageCreateWork
+        {
+            public string start { get; set; }
+            public string end { get; set; }
+            public string updated_at { get; set; }
+            public string created_at { get; set; }
+            public int id { get; set; }
         }
     }
 }

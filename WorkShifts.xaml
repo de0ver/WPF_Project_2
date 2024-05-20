@@ -3,17 +3,28 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPFApp"
+        xmlns:local="clr-namespace:WPFApp" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="WorkShifts" Height="450" Width="800">
+        Title="WorkShifts" Height="450" Width="800" ResizeMode="NoResize">
     <Grid>
-        <Label Content="Создание смены: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label Content="Активная смена: " HorizontalAlignment="Left" Margin="14,90,0,0" VerticalAlignment="Top"/>
-        <Label Content="Заказы смены: " HorizontalAlignment="Left" Margin="14,173,0,0" VerticalAlignment="Top"/>
-        <Label Content="Сотрудники смены: " HorizontalAlignment="Left" Margin="14,135,0,0" VerticalAlignment="Top"/>
-        <DatePicker HorizontalAlignment="Left" Margin="200,10,0,0" VerticalAlignment="Top"/>
-        <DatePicker HorizontalAlignment="Left" Margin="400,10,0,0" VerticalAlignment="Top"/>
+        <Button Click="Back" Content="←" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="50" Width="50" FontSize="20"/>
+        <Border BorderThickness="1" BorderBrush="Black" Margin="75,10,10,309">
+            <Grid>
+                <Label Content="Создание смены: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Label Content="Активная смена: " HorizontalAlignment="Left" Margin="14,136,0,0" VerticalAlignment="Top"/>
+                <Label Content="Заказы смены: " HorizontalAlignment="Left" Margin="19,244,0,0" VerticalAlignment="Top"/>
+                <Label Content="Сотрудники смены: " HorizontalAlignment="Left" Margin="14,213,0,0" VerticalAlignment="Top"/>
+                <DatePicker x:Name="getStartDate" HorizontalAlignment="Left" Margin="160,10,0,0" VerticalAlignment="Top"/>
+                <DatePicker x:Name="getEndDate" HorizontalAlignment="Left" Margin="340,10,0,0" VerticalAlignment="Top"/>
+                <Button Click="CreateWorkShift" Content="Создать" HorizontalAlignment="Left" Margin="467,0,0,0" VerticalAlignment="Center" Width="156" Height="93"/>
+                <Label Content="Старт" HorizontalAlignment="Left" Margin="190,39,0,0" VerticalAlignment="Top"/>
+                <Label Content="Конец" HorizontalAlignment="Left" Margin="368,39,0,0" VerticalAlignment="Top"/>
+                <xctk:TimePicker x:Name="getStartTime" Width="80" Margin="320,8,400,326"></xctk:TimePicker>
+                <xctk:TimePicker x:Name="getEndTime" Width="80" Margin="554,10,166,324"></xctk:TimePicker>
+            </Grid>
+        </Border>
+        <Border BorderThickness="1" BorderBrush="Black" Margin="75,130,10,10"/>
 
     </Grid>
 </Window>

@@ -41,31 +41,21 @@ namespace WPFApp
         {
             ShiftWorkers shiftWorkers = new ShiftWorkers();
 
-            this.Visibility = Visibility.Collapsed;
-
             shiftWorkers.ShowDialog();
-
-            this.Visibility = Visibility.Visible;
         }
         private void goToWorkShifts(object sender, RoutedEventArgs e)
         {
             WorkShifts workShifts = new WorkShifts();
 
-            this.Visibility = Visibility.Collapsed;
-
             workShifts.ShowDialog();
-
-            this.Visibility = Visibility.Visible;
         }
         private void goToOrders(object sender, RoutedEventArgs e)
         {
             Close();
         }
-        protected override void OnClosed(EventArgs e)
+        private void Back(object sender, RoutedEventArgs e)
         {
-            base.OnClosed(e);
-
-            Application.Current.Shutdown();
+            Close();
         }
     }
 }

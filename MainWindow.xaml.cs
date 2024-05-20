@@ -42,9 +42,11 @@ namespace WPFApp
 
                         adminPage.InitializeProfile(json.data.login, json.data.name, json.data.surname, json.data.patronymic, json.data.role_id, json.data.user_id);
 
-                        adminPage.Show();
+                        this.Visibility = Visibility.Collapsed;
 
-                        Hide();
+                        adminPage.ShowDialog();
+
+                        this.Visibility = Visibility.Visible;
                     }
                     else
                     {
@@ -54,11 +56,12 @@ namespace WPFApp
                             string big_message = "Code: " + json.error.code + "\nMessage: " + json.error.message;
 
                             if (json.error.errors.login != null)
-                                big_message += json.error.errors.login[0];
+                                big_message += "\nLogin: " + json.error.errors.login[0];
 
                             if (json.error.errors.password != null)
-                                big_message += json.error.errors.password[0];
+                                big_message += "\nPassword: " + json.error.errors.password[0];
 
+                            MessageBox.Show(big_message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         } else
                         {
                             MessageBox.Show("Code: " + json.error.code + "\nMessage: " + json.error.message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -70,13 +73,6 @@ namespace WPFApp
             {
                 MessageBox.Show(error.ToString());
             }
-        }
-
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-
-            Application.Current.Shutdown();
         }
     }
 }

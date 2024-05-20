@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "SEx84GeHm06Juxkv2L0YHBHM40Wd+4NXx2Bd+ezxfp3uCHZnifMXiIQXWxU3l9A/7yxjRDnEyz+EZZXmY1JCcw==",
+  "dgSpecHash": "PfIxsyTjenz0eigGkvMtKDslvq/x/fBMh4fkYfdGtAE9bQmeolGXwnPBCFIO6i1/mX1fhhyHgnTgpWFDhPc3Pw==",
   "success": true,
   "projectFilePath": "D:\\3is4\\Kiselev\\Desktop_RESTAPI\\WPF_Project_2\\WPFApp.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\student.COLLEGE.021\\.nuget\\packages\\extended.wpf.toolkit\\4.6.0\\extended.wpf.toolkit.4.6.0.nupkg.sha512",
     "C:\\Users\\student.COLLEGE.021\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\8.0.0\\microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512",
     "C:\\Users\\student.COLLEGE.021\\.nuget\\packages\\restsharp\\108.0.3\\restsharp.108.0.3.nupkg.sha512",
     "C:\\Users\\student.COLLEGE.021\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
