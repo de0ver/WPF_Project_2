@@ -23,5 +23,10 @@ namespace WPFApp
         {
             InitializeComponent();
         }
+
+        private void GetData()
+        {
+
+        }
     }
 }
