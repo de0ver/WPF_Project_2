@@ -34,23 +34,31 @@ namespace WPFApp
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        AdminPage adminPage = new AdminPage();
-
                         var json = JsonSerializer.Deserialize<Globals.HTTPMessageOK>(response.Content);
 
-                        Globals.userToken = json.data.user_token;
+                        if (json.data.role_id == 1)
+                        {
+                            AdminPage adminPage = new AdminPage();
 
-                        adminPage.InitializeProfile(json.data.login, json.data.name, json.data.surname, json.data.patronymic, json.data.role_id, json.data.user_id);
+                            Globals.userToken = json.data.user_token;
 
-                        this.Visibility = Visibility.Collapsed;
+                            adminPage.InitializeProfile(json.data.login, json.data.name, json.data.surname, json.data.patronymic, json.data.role_id, json.data.user_id);
 
-                        adminPage.ShowDialog();
+                            this.Visibility = Visibility.Collapsed;
 
-                        this.Visibility = Visibility.Visible;
+                            adminPage.ShowDialog();
+
+                            this.Visibility = Visibility.Visible;
+                        } 
+                        else
+                        {
+                            MessageBox.Show("Отказано в доступе.");
+                        }
                     }
                     else
                     {
                         var json = JsonSerializer.Deserialize<Globals.HTTPMessageError>(response.Content);
+
                         if (json.error.errors != null)
                         {
                             string big_message = "Code: " + json.error.code + "\nMessage: " + json.error.message;
@@ -62,7 +70,8 @@ namespace WPFApp
                                 big_message += "\nPassword: " + json.error.errors.password[0];
 
                             MessageBox.Show(big_message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        } else
+                        }
+                        else
                         {
                             MessageBox.Show("Code: " + json.error.code + "\nMessage: " + json.error.message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }

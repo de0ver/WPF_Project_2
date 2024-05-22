@@ -16,15 +16,38 @@
                 <Label Content="Заказы смены: " HorizontalAlignment="Left" Margin="19,244,0,0" VerticalAlignment="Top"/>
                 <Label Content="Сотрудники смены: " HorizontalAlignment="Left" Margin="14,213,0,0" VerticalAlignment="Top"/>
                 <DatePicker x:Name="getStartDate" HorizontalAlignment="Left" Margin="160,10,0,0" VerticalAlignment="Top"/>
-                <DatePicker x:Name="getEndDate" HorizontalAlignment="Left" Margin="340,10,0,0" VerticalAlignment="Top"/>
-                <Button Click="CreateWorkShift" Content="Создать" HorizontalAlignment="Left" Margin="467,0,0,0" VerticalAlignment="Center" Width="156" Height="93"/>
+                <DatePicker x:Name="getEndDate" HorizontalAlignment="Left" Margin="368,10,0,0" VerticalAlignment="Top"/>
+                <Button Click="CreateWorkShift" Content="Создать" HorizontalAlignment="Left" Margin="584,10,0,0" VerticalAlignment="Top" Width="100" Height="70" FontSize="16" FontWeight="Bold">
+                    <Button.Background>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GradientActiveCaptionColorKey}}"/>
+                    </Button.Background>
+                </Button>
                 <Label Content="Старт" HorizontalAlignment="Left" Margin="190,39,0,0" VerticalAlignment="Top"/>
-                <Label Content="Конец" HorizontalAlignment="Left" Margin="368,39,0,0" VerticalAlignment="Top"/>
-                <xctk:TimePicker x:Name="getStartTime" Width="80" Margin="320,8,400,326"></xctk:TimePicker>
-                <xctk:TimePicker x:Name="getEndTime" Width="80" Margin="554,10,166,324"></xctk:TimePicker>
+                <Label Content="Конец" HorizontalAlignment="Left" Margin="396,39,0,0" VerticalAlignment="Top"/>
+                <xctk:TimePicker x:Name="getEndTime" Margin="483,10,146,48" DisplayDefaultValueOnEmptyText="True" ShowDropDownButton="False" EndTime="23:59:00" TextAlignment="Center"/>
+                <xctk:TimePicker x:Name="getStartTime" Margin="272,10,357,48" DisplayDefaultValueOnEmptyText="True" ShowDropDownButton="False" EndTime="23:59:00" TextAlignment="Center"/>
             </Grid>
         </Border>
-        <Border BorderThickness="1" BorderBrush="Black" Margin="75,130,10,10"/>
+        <Border BorderThickness="1" BorderBrush="Black" Margin="75,130,10,10">
+            <Grid>
+                <Label Content="Выберите смену: " HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top"/>
+                <ListBox x:Name="currentShiftWorkers" Margin="450,62,0,10" HorizontalAlignment="Left" Visibility="Hidden"/>
+                <ListBox x:Name="currentShiftOrders" Margin="300,62,0,10" HorizontalAlignment="Left" Visibility="Hidden"/>
+                <Label x:Name="currentWorkersLabel" Content="Сотрудники" HorizontalAlignment="Left" Margin="470,15,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+                <Label x:Name="currentOrdersLabel" Content="Заказы" HorizontalAlignment="Left" Margin="335,15,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+                <Button x:Name="CloseWorkShift" Click="CloseShift" Content="Закрыть" Visibility="Hidden" HorizontalAlignment="Left" Margin="18,49,0,0" VerticalAlignment="Top" Height="38" Width="90" FontSize="16" FontWeight="Bold">
+                    <Button.Background>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GradientActiveCaptionColorKey}}"/>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="OpenWorkShift" Click="OpenShift" Content="Открыть" Visibility="Hidden" HorizontalAlignment="Left" Margin="18,49,0,0" VerticalAlignment="Top" Height="38" Width="90" FontSize="16" FontWeight="Bold">
+                    <Button.Background>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GradientActiveCaptionColorKey}}"/>
+                    </Button.Background>
+                </Button>
+                <ComboBox SelectionChanged="allWorkShifts_SelectionChanged" x:Name="allWorkShifts" HorizontalAlignment="Left" Margin="121,17,0,0" VerticalAlignment="Top" Width="120"/>
+            </Grid>
+        </Border>
 
     </Grid>
 </Window>

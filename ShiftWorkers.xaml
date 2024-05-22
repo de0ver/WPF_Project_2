@@ -12,8 +12,8 @@
             <Grid Margin="-1,0,0,0">
                 <Label Content="Выберите сотрудника: " HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center"/>
                 <ComboBox x:Name="WorkersList" HorizontalAlignment="Left" Margin="151,0,0,0" VerticalAlignment="Center" Width="390"/>
-                <Button Click="DeleteWorker" Content="Уволить" HorizontalAlignment="Left" Margin="546,0,0,0" VerticalAlignment="Center" FontFamily="Verdana" FontSize="16" Background="Red" Padding="5,5,5,5" />
-                <Button Click="ReturnWorker" Content="Вернуть" HorizontalAlignment="Left" Margin="629,0,0,0" VerticalAlignment="Center" FontFamily="Verdana" FontSize="16" Background="Green" Padding="5,5,5,5" />
+                <Button Click="DeleteWorker" Content="Уволить" HorizontalAlignment="Left" Margin="553,0,0,0" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="16" Background="Red" Padding="5,5,5,5" RenderTransformOrigin="0.421,0.561" />
+                <Button Click="ReturnWorker" Content="Вернуть" HorizontalAlignment="Left" Margin="643,0,0,0" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="16" Background="Green" Padding="5,5,5,5" />
             </Grid>
         </Border>
         <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="345" Margin="10,63,0,0" VerticalAlignment="Top" Width="351">
@@ -30,7 +30,11 @@
                     <ComboBoxItem Content="Официант"/>
                     <ComboBoxItem Content="Повар"/>
                 </ComboBox>
-                <Button Click="AddWorker" Content="Создать" HorizontalAlignment="Left" Margin="19,236,0,0" VerticalAlignment="Top" Height="85" Width="258"/>
+                <Button Click="AddWorker" Content="Создать" HorizontalAlignment="Left" Margin="19,236,0,0" VerticalAlignment="Top" Height="85" Width="258" BorderBrush="Black" Foreground="Black" FontSize="16" FontWeight="Bold">
+                    <Button.Background>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GradientActiveCaptionColorKey}}"/>
+                    </Button.Background>
+                </Button>
                 <TextBox x:Name="inputName" TextChanged="CheckInputs" HorizontalAlignment="Left" Margin="158,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                 <TextBox x:Name="inputSurname" TextChanged="CheckInputs" HorizontalAlignment="Left" Margin="158,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                 <TextBox x:Name="inputPatronymic" TextChanged="CheckInputs" HorizontalAlignment="Left" Margin="158,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
@@ -49,7 +53,7 @@
         <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="345" Margin="366,63,0,0" VerticalAlignment="Top" Width="424">
             <Label Content="Здесь фото сотрудника при создании..."/>
         </Border>
-        <Button Click="Back" Content="←" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top" Height="50" Width="50" FontSize="20"/>
+        <Button Click="Back" Content="←" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top" Height="50" Width="50" FontSize="20" FontWeight="Normal"/>
 
     </Grid>
 </Window>

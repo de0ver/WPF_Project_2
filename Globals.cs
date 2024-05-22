@@ -15,9 +15,10 @@ namespace Global
         public static string localProxyURL = "http://192.168.0.17:3128";
         public string globalURL = "http://api.govorovma.ru/api-cafe/login";
         public string localURL = "http://cncaevh-m2.wsr.ru/api-cafe/login";
-        public string getUsersURL = "http://cncaevh-m2.wsr.ru/api-cafe/user"; //xd
-        public string deleteUserURL = "http://cncaevh-m2.wsr.ru/api-cafe/user"; //xd
-        public string addWorkShift = "http://cncaevh-m2.wsr.ru/api-cafe/work-shift";
+        public string localURL2 = "http://jbgfrra-m2.wsr.ru/api-cafe/login";
+        public string UserURL = "http://cncaevh-m2.wsr.ru/api-cafe/user"; //xd
+        public string WorkShiftURL = "http://cncaevh-m2.wsr.ru/api-cafe/work-shift";
+        public string OrderURL = "http://cncaevh-m2.wsr.ru/api-cafe/order";
         public static string userToken { get; set; }
 
         public static WebProxy webProxy = new WebProxy
@@ -101,5 +102,45 @@ namespace Global
             public string created_at { get; set; }
             public int id { get; set; }
         }
+
+        public class HTTPMessageShifts
+        {
+            public class MessageShifts
+            {
+                public int id { get; set; }
+                public string start { get; set; }
+                public string end { get; set; }
+                public int active { get; set; }
+                public string created_at { get; set; }
+                public string updated_at { get; set; }
+            }
+
+            public class MessageWorkers
+            {
+                public int id { get; set; }
+                public string name { get; set; }
+                public string login { get; set; }
+                public string status { get; set; }
+                public Pivot pivot { get; set; }
+                public class Pivot
+                {
+                    public int work_shift_id { get; set; }
+                    public int user_id { get; set; }
+                }
+            }
+
+            public class MessageOrders
+            {
+                public int id { get; set; }
+                public string table { get; set; }
+                public string shift_workers { get; set; }
+                public string created_at { get; set; }
+                public string status { get; set; }
+                public int price { get; set; }
+
+            }
+        }
+
+        
     }
 }

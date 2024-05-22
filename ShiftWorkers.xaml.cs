@@ -3,6 +3,7 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -20,13 +21,27 @@ namespace WPFApp
         {
             InitializeComponent();
             GetWorkers();
+            ChangeTitle();
         }
 
-        private void GetWorkers()
+        async void ChangeTitle()
         {
-            var request = new RestRequest(globals.getUsersURL, method: Method.Get);
-            request.AddHeader("Authorization", "Bearer " + Globals.userToken);
+            while (true)
+            {
+                this.Title = "%Workers%";
+                await Task.Delay(1000);
+                this.Title = "&Workers&";
+                await Task.Delay(1000);
+                this.Title = "$Workers$";
+                await Task.Delay(1000);
+            }
+        }
 
+        async Task GetWorkers()
+        {
+            var request = new RestRequest(globals.UserURL, method: Method.Get);
+            request.AddHeader("Authorization", "Bearer " + Globals.userToken);
+            await Task.Delay(0);
             try
             {
                 var response = globals.client.Execute(request);
@@ -35,7 +50,7 @@ namespace WPFApp
 
                 for (int i = 0; i < json.user.Count; i++)
                 {
-                    WorkersList.Items.Add("ID: " + json.user[i].id + " | Name: " + json.user[i].name + " | Status: " + json.user[i].status + " | Group: " + json.user[i].group);
+                    WorkersList.Items.Add("Id: " + json.user[i].id + " | Name: " + json.user[i].name + " | Status: " + json.user[i].status + " | Group: " + json.user[i].group);
                     workersId.Add(int.Parse(json.user[i].id.ToString())); //trash
                 }
             }
@@ -56,7 +71,7 @@ namespace WPFApp
         {
             if (WorkersList.SelectedIndex >= 0)
             {
-                var request = new RestRequest(globals.getUsersURL + "/" + workersId[WorkersList.SelectedIndex], method: Method.Delete);
+                var request = new RestRequest(globals.UserURL + "/" + workersId[WorkersList.SelectedIndex], method: Method.Delete);
 
                 request.AddHeader("Authorization", "Bearer " + Globals.userToken);
 
@@ -66,7 +81,7 @@ namespace WPFApp
                     if (response.StatusCode == System.Net.HttpStatusCode.Created)
                     {
                         var json = JsonSerializer.Deserialize<Globals.HTTPMessageCreated>(response.Content);
-                        MessageBox.Show("ID: " + json.data.id + "\nStatus: " + json.data.status);
+                        MessageBox.Show("Id: " + json.data.id + "\nStatus: " + json.data.status);
                     }
                 }
                 catch (Exception error)
@@ -80,7 +95,7 @@ namespace WPFApp
 
         private void ReturnWorker(object sender, RoutedEventArgs e)
         {
-            var request = new RestRequest(globals.getUsersURL + "/" + workersId[WorkersList.SelectedIndex] + "/back", method: Method.Delete);
+            var request = new RestRequest(globals.UserURL + "/" + workersId[WorkersList.SelectedIndex] + "/back", method: Method.Delete);
             request.AddHeader("Authorization", "Bearer " + Globals.userToken);
 
             try
@@ -89,7 +104,7 @@ namespace WPFApp
                 if (response.StatusCode == System.Net.HttpStatusCode.Created)
                 {
                     var json = JsonSerializer.Deserialize<Globals.HTTPMessageCreated>(response.Content);
-                    MessageBox.Show("ID: " + json.data.id + "\nStatus: " + json.data.status);
+                    MessageBox.Show("Id: " + json.data.id + "\nStatus: " + json.data.status);
                 }
             }
             catch (Exception error)
@@ -102,7 +117,7 @@ namespace WPFApp
 
         private void AddWorker(object sender, RoutedEventArgs e)
         {
-            var request = new RestRequest(globals.getUsersURL, method: Method.Post);
+            var request = new RestRequest(globals.UserURL, method: Method.Post);
 
             request.AddHeader("Authorization", "Bearer " + Globals.userToken);
             request.AddParameter("name", inputName.Text);
@@ -118,7 +133,7 @@ namespace WPFApp
                 if (response.StatusCode == System.Net.HttpStatusCode.Created)
                 {
                     var json = JsonSerializer.Deserialize<Globals.HTTPMessageCreated>(response.Content);
-                    MessageBox.Show("ID: " + json.data.id + "\nStatus: " + json.data.status);
+                    MessageBox.Show("Id: " + json.data.id + "\nStatus: " + json.data.status);
 
                     inputName.Text = inputSurname.Text = inputPatronymic.Text = inputLogin.Text = inputPassword.Password = inputPasswordConfirm.Password = null;
                     inputRole.SelectedIndex = -1;
