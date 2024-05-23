@@ -12,15 +12,14 @@ namespace WPFApp
     public partial class MainWindow : Window
     {
         Globals globals = new Globals();
-        Globals.JSONUser user = new Globals.JSONUser();
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void LogInAsync(object sender, RoutedEventArgs e)
+        private void LogIn(object sender, RoutedEventArgs e) //user enter to app
         {
-            var request = new RestRequest(globals.localURL, method: Method.Post);
+            var request = new RestRequest(globals.localURL3, method: Method.Post);
             request.AddHeader("Content-Type", "application/json");
 
             var body = "{\n    \"login\": \"" + userLogin.Text + "\",\n    \"password\": \"" + userPassword.Password + "\"\n}";
@@ -44,11 +43,11 @@ namespace WPFApp
 
                             adminPage.InitializeProfile(json.data.login, json.data.name, json.data.surname, json.data.patronymic, json.data.role_id, json.data.user_id);
 
-                            this.Visibility = Visibility.Collapsed;
+                            Visibility = Visibility.Collapsed;
 
                             adminPage.ShowDialog();
 
-                            this.Visibility = Visibility.Visible;
+                            Visibility = Visibility.Visible;
                         } 
                         else
                         {

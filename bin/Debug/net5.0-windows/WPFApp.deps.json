@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v5.0": {
-      "WPFApp/1": {
+      "WPFApp/100": {
         "dependencies": {
           "Extended.Wpf.Toolkit": "4.6.0",
           "RestSharp": "108.0.3",
@@ -140,7 +140,7 @@
     }
   },
   "libraries": {
-    "WPFApp/1": {
+    "WPFApp/100": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

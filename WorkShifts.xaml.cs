@@ -13,7 +13,7 @@ namespace WPFApp
     public partial class WorkShifts : Window
     {
         Globals globals = new Globals();
-        private int[] active_shift = new int[2] { -999, -999 };
+        private int[] active_shift = new int[2] { -999, -999 }; //work_shift_id, active_shift_id
         private List<int> allShiftsId = new List<int>();
         public WorkShifts()
         {
@@ -21,7 +21,7 @@ namespace WPFApp
             GetAllShifts();
         }
 
-        private void GetAllShifts()
+        private void GetAllShifts() //get all workshifts from database
         {
             var request = new RestRequest(globals.WorkShiftURL, method: Method.Get);
             request.AddHeader("Authorization", "Bearer " + Globals.userToken);
@@ -42,7 +42,7 @@ namespace WPFApp
             }
         }
 
-        private void Clear()
+        private void Clear() //clear all for update data
         {
             allWorkShifts.Items.Clear();
             allWorkShifts.SelectedIndex = -1;
@@ -51,7 +51,7 @@ namespace WPFApp
             GetAllShifts();
         }
 
-        private void CreateWorkShift(object sender, RoutedEventArgs e)
+        private void CreateWorkShift(object sender, RoutedEventArgs e) //create new workshift in database
         {
             var request = new RestRequest(globals.WorkShiftURL, method: Method.Post);
 
@@ -78,7 +78,6 @@ namespace WPFApp
                 }
             }
 
-
             if (getEndTime.Value.HasValue)
             {
                 if (getEndTime.Text.IndexOf(':') == 1)
@@ -102,7 +101,7 @@ namespace WPFApp
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.Created)
                     {
-                        var json = JsonSerializer.Deserialize<Globals.HTTPMessageCreateWork>(response.Content);
+                        var json = JsonSerializer.Deserialize<Globals.HTTPMessageShifts.MessageCreateWorkShift>(response.Content);
 
                         MessageBox.Show("Start: " + json.start + "\nEnd: " + json.end + "\nUpdated at: " + json.updated_at + "\nCreated at: " + json.created_at + "\nId :" + json.id);
                     }
@@ -124,12 +123,12 @@ namespace WPFApp
             Clear();
         }
 
-        private void Back(object sender, RoutedEventArgs e)
+        private void Back(object sender, RoutedEventArgs e) //go to adminpage
         {
             Close();
         }
         
-        private void CloseShift(object sender, RoutedEventArgs e)
+        private void CloseShift(object sender, RoutedEventArgs e) //set active 0 for selected shift in database
         {
             if (active_shift[0] != -1 && active_shift[1] != -1 && allWorkShifts.SelectedIndex != -1)
             {
@@ -153,31 +152,30 @@ namespace WPFApp
             Clear();
         }
 
-        private void OpenShift(object sender, RoutedEventArgs e)
+        private void OpenShift(object sender, RoutedEventArgs e) //set active 1 for selected shift in database
         {
-           
-                if (active_shift[1] >= 0)
-                {
-                    MessageBox.Show("Закройте смену " + active_shift[0] + " прежде чем открывать другую!");
-                }
-                else
-                {
-                    var request = new RestRequest(globals.WorkShiftURL + "/" + allShiftsId[allWorkShifts.SelectedIndex] + "/open", method: Method.Get);
-                    request.AddHeader("Authorization", "Bearer " + Globals.userToken);
+            if (active_shift[1] >= 0)
+            {
+                MessageBox.Show("Закройте смену " + active_shift[0] + " прежде чем открывать другую!");
+            }
+            else
+            {
+                var request = new RestRequest(globals.WorkShiftURL + "/" + allShiftsId[allWorkShifts.SelectedIndex] + "/open", method: Method.Get);
+                request.AddHeader("Authorization", "Bearer " + Globals.userToken);
 
-                    try
+                try
+                {
+                    var response = globals.client.Execute(request);
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        var response = globals.client.Execute(request);
-                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                        {
-                            MessageBox.Show("Открыта!");
-                        }
-                    }
-                    catch (Exception error)
-                    {
-                        MessageBox.Show(error.ToString());
+                        MessageBox.Show("Открыта!");
                     }
                 }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.ToString());
+                }
+            }
 
             Clear();
         }
@@ -202,7 +200,7 @@ namespace WPFApp
             }
         }
 
-        private void GetWorkersFromShift(int shiftId)
+        private void GetWorkersFromShift(int shiftId) //get workers from active shift
         {
             if (shiftId >= 0)
             {
@@ -229,7 +227,7 @@ namespace WPFApp
             }
         }
 
-        private void GetOrdersFromShift(int shiftId)
+        private void GetOrdersFromShift(int shiftId) //get orders from active shift
         {
             if (shiftId >= 0)
             {

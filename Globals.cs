@@ -3,32 +3,32 @@ using System.Net;
 using System.Net.Http;
 using RestSharp;
 using System.Collections.Generic;
-using System.Windows;
 
 namespace Global
 {
     public class Globals
     {
-        public static string proxyURL = "http://192.168.0.100:3128";
-        public string proxyUsername = "2is4";
-        public string proxyPassword = "edu-351";
-        public static string localProxyURL = "http://192.168.0.17:3128";
-        public string globalURL = "http://api.govorovma.ru/api-cafe/login";
-        public string localURL = "http://cncaevh-m2.wsr.ru/api-cafe/login";
-        public string localURL2 = "http://jbgfrra-m2.wsr.ru/api-cafe/login";
-        public string UserURL = "http://cncaevh-m2.wsr.ru/api-cafe/user"; //xd
-        public string WorkShiftURL = "http://cncaevh-m2.wsr.ru/api-cafe/work-shift";
-        public string OrderURL = "http://cncaevh-m2.wsr.ru/api-cafe/order";
+        public static string proxyURL = "http://192.168.0.100:3128";                //internet (college)
+        public string proxyUsername = "2is4";                                       //internet (college)
+        public string proxyPassword = "edu-351";                                    //internet (college)
+        public string globalURL = "http://api.govorovma.ru/api-cafe/login";         //internet (college)
+        public static string localProxyURL = "http://192.168.0.17:3128";            //lan
+        public string localURL = "http://cncaevh-m2.wsr.ru/api-cafe/login";         //lan
+        public string localURL2 = "http://jbgfrra-m2.wsr.ru/api-cafe/login";        //lan
+        public string localURL3 = "http://backend/api-cafe/login";        //lan
+        public string UserURL = "http://backend/api-cafe/user";           //lan
+        public string WorkShiftURL = "http://backend/api-cafe/work-shift";//lan
+        public string OrderURL = "http://backend/api-cafe/order";         //lan
         public static string userToken { get; set; }
 
         public static WebProxy webProxy = new WebProxy
         {
-            Address = new Uri(localProxyURL)
+            //Address = new Uri(localProxyURL)
         };
 
         public static HttpClientHandler httpClientHandler = new HttpClientHandler
         {
-            Proxy = webProxy
+            //Proxy = webProxy
         };
 
         public RestClient client = new RestClient(httpClientHandler);
@@ -94,17 +94,17 @@ namespace Global
             }
         }
 
-        public class HTTPMessageCreateWork
-        {
-            public string start { get; set; }
-            public string end { get; set; }
-            public string updated_at { get; set; }
-            public string created_at { get; set; }
-            public int id { get; set; }
-        }
-
         public class HTTPMessageShifts
         {
+            public class MessageCreateWorkShift
+            {
+                public string start { get; set; }
+                public string end { get; set; }
+                public string updated_at { get; set; }
+                public string created_at { get; set; }
+                public int id { get; set; }
+            }
+
             public class MessageShifts
             {
                 public int id { get; set; }
@@ -137,10 +137,7 @@ namespace Global
                 public string created_at { get; set; }
                 public string status { get; set; }
                 public int price { get; set; }
-
             }
         }
-
-        
     }
 }

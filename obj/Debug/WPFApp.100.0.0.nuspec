@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>WPFApp</id>
+    <version>100.0.0</version>
+    <authors>WPFApp</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework="net5.0-windows7.0">
+        <dependency id="Extended.Wpf.Toolkit" version="4.6.0" exclude="Build,Analyzers" />
+        <dependency id="RestSharp" version="108.0.3" exclude="Build,Analyzers" />
+        <dependency id="System.Text.Json" version="8.0.3" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net5.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
+      </group>
+    </frameworkReferences>
+  </metadata>
+  <files>
+    <file src="A:\Sources\Pack\Frontend\CSharp\WPF_Project_2\bin\Debug\net5.0-windows\WPFApp.runtimeconfig.json" target="lib\net5.0-windows7.0\WPFApp.runtimeconfig.json" />
+    <file src="A:\Sources\Pack\Frontend\CSharp\WPF_Project_2\bin\Debug\net5.0-windows\WPFApp.dll" target="lib\net5.0-windows7.0\WPFApp.dll" />
+  </files>
+</package>

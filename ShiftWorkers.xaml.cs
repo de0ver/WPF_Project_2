@@ -28,20 +28,20 @@ namespace WPFApp
         {
             while (true)
             {
-                this.Title = "%Workers%";
+                Title = "%%%Workers%%%";
                 await Task.Delay(1000);
-                this.Title = "&Workers&";
+                Title = "&&Workers&&";
                 await Task.Delay(1000);
-                this.Title = "$Workers$";
+                Title = "$Workers$";
                 await Task.Delay(1000);
             }
         }
 
-        async Task GetWorkers()
+        private void GetWorkers() //get all workers from database
         {
             var request = new RestRequest(globals.UserURL, method: Method.Get);
             request.AddHeader("Authorization", "Bearer " + Globals.userToken);
-            await Task.Delay(0);
+            
             try
             {
                 var response = globals.client.Execute(request);
@@ -60,14 +60,14 @@ namespace WPFApp
             }
         }
 
-        private void Clear()
+        private void Clear() //clear for update data
         {
             WorkersList.Items.Clear();
             workersId = new List<int>();
             GetWorkers();
         }
 
-        private void DeleteWorker(object sender, RoutedEventArgs e)
+        private void DeleteWorker(object sender, RoutedEventArgs e) //set worker status to fired
         {
             if (WorkersList.SelectedIndex >= 0)
             {
@@ -93,7 +93,7 @@ namespace WPFApp
             Clear();
         }
 
-        private void ReturnWorker(object sender, RoutedEventArgs e)
+        private void ReturnWorker(object sender, RoutedEventArgs e) //set worker status to working
         {
             var request = new RestRequest(globals.UserURL + "/" + workersId[WorkersList.SelectedIndex] + "/back", method: Method.Delete);
             request.AddHeader("Authorization", "Bearer " + Globals.userToken);
@@ -115,7 +115,7 @@ namespace WPFApp
             Clear();
         }
 
-        private void AddWorker(object sender, RoutedEventArgs e)
+        private void AddWorker(object sender, RoutedEventArgs e) //add new worker to database
         {
             var request = new RestRequest(globals.UserURL, method: Method.Post);
 
@@ -179,7 +179,7 @@ namespace WPFApp
             }
         }
 
-        private void CheckInputs(object sender, TextChangedEventArgs e)
+        private void CheckInputs(object sender, TextChangedEventArgs e) //check inputs for user create
         {
             checkName.IsChecked = inputName.Text.Length >= 3;
             checkSurname.IsChecked = inputSurname.Text.Length >= 3;
@@ -187,7 +187,7 @@ namespace WPFApp
             checkLogin.IsChecked = inputLogin.Text.Length >= 3;
         }
 
-        private void CheckPasswords(object sender, RoutedEventArgs e)
+        private void CheckPasswords(object sender, RoutedEventArgs e) 
         {
             checkPassword.IsChecked = inputPassword.Password.Length >= 4;
             checkPasswordConf.IsChecked = inputPassword.Password == inputPasswordConfirm.Password;
@@ -198,7 +198,7 @@ namespace WPFApp
             checkRole.IsChecked = inputRole.SelectedIndex >= 0;
         }
 
-        private void Back(object sender, RoutedEventArgs e)
+        private void Back(object sender, RoutedEventArgs e) //back to adminpage
         {
             //1 million windows is ready, another one is on the way
             //Hide();

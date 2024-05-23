@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows;
-using Global;
+﻿using System.Windows;
 
 namespace WPFApp
 {
